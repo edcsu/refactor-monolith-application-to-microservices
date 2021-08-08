@@ -30,7 +30,7 @@ script:
   - docker tag udagram-api-user skelevel/udagram-api-user:v1
 
   - docker build -t udagram-frontend ./udagram-frontend
-  - docker tag udagram-frontend skelevel/frontend:v1
+  - docker tag udagram-frontend skelevel/udagram-frontend:v1
   
   - docker build -t udagram-reverse-proxy ./udagram-reverseproxy
   - docker tag udagram-reverse-proxy skelevel/udagram-reverseproxy:v1
