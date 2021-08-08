@@ -14,7 +14,7 @@ before_install:
 
 # Pre-testing installs
 install:
-  - docker-compose -f ./docker-compose-build.yaml build --parallel
+  - docker-compose --no-cache -f build --parallel
 
 # Scripts to be run such as tests
 before_script:
