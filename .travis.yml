@@ -14,7 +14,7 @@ before_install:
 
 # Pre-testing installs
 install:
-  - docker-compose build --parallel --no-cache
+  - docker-compose -f deployment/docker/docker-compose-build.yaml build --parallel --no-cache
 
 # Scripts to be run such as tests
 before_script:
@@ -22,6 +22,18 @@ before_script:
 
 script:
   - docker --version # print the version for logging
+
+  - docker build -t udagram-feed-api ./udagram-api-feed
+  - docker tag udagram-feed-api skelevel/udagram-feed-api:v1
+
+  - docker build -t udagram-user-api ./udagram-api-user
+  - docker tag udagram-user-api skelevel/udagram-user-api:v1
+
+  - docker build -t udagram-frontend ./udagram-frontend
+  - docker tag udagram-frontend skelevel/frontend:v1
+  
+  - docker build -t udagram-reverse-proxy ./udagram-reverseproxy
+  - docker tag udagram-reverse-proxy skelevel/udagram-reverse-proxy:v1
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
